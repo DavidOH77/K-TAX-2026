@@ -1,0 +1,5 @@
+{
+  "name": "K-Tax Simulator 2026",
+  "description": "대한민국 국세청 기준 동적 상속/증여세 시뮬레이터 및 법률 리스크 체커",
+  "requestFramePermissions": []
+}

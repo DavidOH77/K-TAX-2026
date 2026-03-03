@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  body {
+    @apply bg-[#F8F9FA] text-slate-900;
+  }
+}
+
+.markdown-body h2 {
+  @apply text-3xl font-black text-slate-900 mt-16 mb-8 tracking-tighter border-b-2 border-slate-900 pb-4 uppercase;
+}
+
+.markdown-body h3 {
+  @apply text-xl font-bold text-slate-800 mt-12 mb-6 tracking-tight flex items-center gap-2;
+}
+
+.markdown-body p {
+  @apply mb-8 leading-relaxed text-slate-600 text-lg;
+}
+
+.markdown-body hr {
+  @apply border-t-2 border-slate-100 my-16;
+}
+
+.markdown-body ul {
+  @apply list-none space-y-4 mb-8 pl-0;
+}
+
+.markdown-body li {
+  @apply flex items-start gap-3 before:content-['•'] before:text-indigo-500 before:font-bold before:text-xl before:leading-none;
+}
+
+.markdown-body strong {
+  @apply text-slate-900 font-black;
+}
+
+.markdown-body blockquote {
+  @apply bg-indigo-50/50 border-l-4 border-indigo-500 p-6 rounded-r-2xl italic text-indigo-900 my-8 text-lg;
+}
+
+.markdown-body blockquote p {
+  @apply m-0 text-indigo-900;
+}
+
+@keyframes wavy-blur {
+  0% { filter: blur(12px) brightness(1.1); transform: scale(1); }
+  50% { filter: blur(15px) brightness(1.2); transform: scale(1.02); }
+  100% { filter: blur(12px) brightness(1.1); transform: scale(1); }
+}
+
+.animate-wavy-blur {
+  animation: wavy-blur 3s ease-in-out infinite;
+}
+
+@media print {
+  .no-print {
+    display: none;
+  }
+}

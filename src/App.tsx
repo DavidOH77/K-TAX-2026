@@ -70,7 +70,7 @@ interface FormData {
   purpose?: string;
 }
 
-type AppMode = 'gift' | 'cit' | 'living' | 'corp_convert' | 'temp_payment' | 'surplus_exit';
+type AppMode = 'gift' | 'cit' | 'corp_convert' | 'temp_payment' | 'surplus_exit';
 
 // --- Constants ---
 
@@ -273,7 +273,7 @@ export default function App() {
         `;
       } else if (mode === 'gift') {
         prompt = `
-          당신은 30년 경력의 대한민국 최고 상속/증여 전문 세무사입니다.
+          당신은 30년 경력의 대한민국 최고 상속/증여 전문 세무사입니다. 유찬영 세무사 등 업계 거장들이 강조하는 "국세청도 허락한 합법적 절세 비법"을 사용자에게 전수하세요.
           사용자가 입력한 데이터를 바탕으로 [2026년 최신 개정 세법]을 반영한 절세 리포트를 작성하세요.
 
           [사용자 입력 데이터]
@@ -287,25 +287,24 @@ export default function App() {
 
           [리포트 구성 요소]
           1. **예상 세금**: 공제액을 제외한 실제 납부 세액 계산
-          2. **자산별 특화 절세 전략**: 
-             - ${formData.asset_type === '아파트' ? '아파트는 유사 매매사례가액이 우선 적용되므로, 증여 시점 조절을 통한 절세 전략' : ''}
-             - ${['꼬마빌딩/상가', '다가구/단독주택'].includes(formData.asset_type) ? '꼬마빌딩/상가는 시가 파악이 어려워 감정평가나 기준시가를 활용할 수 있습니다. 특히 감정평가를 통해 시가보다 낮게 평가받아 증여세를 낮추는 전략을 제시하세요.' : ''}
-             - ${formData.asset_type === '꼬마빌딩/상가' && formData.is_corp_acquisition ? '부동산 임대 법인을 설립하여 부모로부터 자금을 빌리고(차용), 은행 LTV를 최대한 활용하여 자녀 법인이 건물을 매수하게 함으로써 증여세 없이 자산을 이전하는 법인 활용 전략을 상세히 설명하세요.' : ''}
-             - ${formData.asset_type === '비상장주식' ? '비상장주식은 증여 전 배당 확대, 이익 조절 등을 통해 주식 가치를 인위적으로 낮춘 후 증여하는 전략이 핵심입니다. 순자산가치와 순손익가치 가중평균 원리를 아주 쉽게 설명해주세요.' : ''}
+          2. **30년차 세무사의 '자산별' 시크릿 전략**: 
+             - ${formData.asset_type === '아파트' ? '아파트는 유사 매매사례가액이 우선 적용되므로, 증여 시점 조절을 통한 절세 전략. 특히 국세청 감정평가사업(꼬마빌딩 등)의 타겟이 되지 않도록 주의할 점.' : ''}
+             - ${['꼬마빌딩/상가', '다가구/단독주택'].includes(formData.asset_type) ? '꼬마빌딩/상가는 시가 파악이 어려워 감정평가나 기준시가를 활용할 수 있습니다. 국세청이 직접 감정평가를 하기 전에, 우리가 먼저 유리한 감정평가법인을 통해 시가보다 낮게(하지만 합리적으로) 평가받아 증여세를 낮추는 "선제적 감정평가" 전략을 제시하세요.' : ''}
+             - ${formData.asset_type === '꼬마빌딩/상가' && formData.is_corp_acquisition ? '부동산 임대 법인을 설립하여 부모로부터 자금을 빌리고(차용), 은행 LTV를 최대한 활용하여 자녀 법인이 건물을 매수하게 함으로써 증여세 없이 수십억 자산을 이전하는 "법인 레버리지 전략"을 상세히 설명하세요. (부모 자금 대여 시 적정 이자율 4.6% 준수 및 차용증 작성 필수)' : ''}
+             - ${formData.asset_type === '비상장주식' ? '비상장주식은 증여 전 배당 확대, 이익 조절, 임원 퇴직금 지급 등을 통해 주식 가치를 인위적으로 크게 떨어뜨린 후 증여하는 전략이 핵심입니다. 순자산가치와 순손익가치 가중평균 원리를 활용한 "주가 다이어트" 비법을 설명해주세요.' : ''}
              - 혼인/출산 증여재산 공제(최대 1억 추가) 활용법
-             - 증여 취득세 및 양도세 이월과세 주의사항
-          3. **VVIP 시나리오 제안**: 
-             - "신규 자녀 법인 설립 후 부모 법인과의 거래를 통한 자산 이전"
-             - "영업권 평가를 통한 비과세 현금 인출"
-             - "가족 법인을 활용한 부동산 임대업 전환"
-             - 위 시나리오 중 가장 적합한 것을 하나 골라 상세히 설명하고, '부당행위계산부인' 및 '증여세 완전포괄주의' 리스크를 경고할 것.
-          4. **주의사항**: 세무조사 리스크 및 자금출처조사 대비책
+          3. **VVIP 시나리오 제안 (국세청도 허락한 방법)**: 
+             - "자녀 법인에 현금 증여 후, 그 법인이 부모의 부동산이나 주식을 저가 매수하는 전략"
+             - "영업권 평가를 통한 법인 자금의 비과세 개인화"
+             - "가족 법인을 활용한 부동산 임대업 전환 및 가업승계 주식 증여세 과세특례 활용"
+             - 위 시나리오 중 가장 적합한 것을 하나 골라 상세히 설명하고, '부당행위계산부인' 및 '증여세 완전포괄주의' 리스크를 피하는 법을 조언할 것.
+          4. **주의사항**: 자금출처조사 소명 대비책 및 국세청의 '감정평가사업' 대응 전략
 
           [출력 가이드]
-          - **30년차 세무사의 노련함**이 묻어나는 말투로, 할머니/할아버지도 이해할 수 있는 아주 쉬운 용어를 사용하세요.
+          - **30년차 세무사의 노련함과 자신감**이 묻어나는 말투로 작성하세요.
+          - 할머니/할아버지도 이해할 수 있는 아주 쉬운 용어를 사용하세요. (예: "주가 다이어트", "선제 공격 감정평가")
           - 마크다운 문법을 적극 활용하고, 섹션은 가로선(---)으로 구분하세요.
           - 반응형 HTML 구조로 작성하여 PDF 인쇄 시 깨지지 않도록 하세요.
-          - 시각적으로 보기 편하게 <div>, <h1>, <p>, <ul>, <li> 태그를 적절히 사용하세요.
           - 스타일은 Tailwind CSS 클래스를 사용하세요.
         `;
       } else if (mode === 'cit') {
@@ -347,50 +346,6 @@ export default function App() {
           - **필수 체크:** 적격증빙 관리법
           - **추천 공제:** 노란우산공제, 창업중소기업 세액감면 등
         `;
-      } else {
-        const isLivingMode = mode === 'living';
-        prompt = `
-          너는 대한민국 국세청 데이터를 기반으로 작동하는 '동적(Dynamic) 상속/증여세 시뮬레이터 및 법률 리스크 체커'야.
-          ${isLivingMode ? "특히 '생활비 및 보증금 지원'이라는 특수한 상황에 맞춰 절세 전략을 짜줘." : ""}
-          사용자로부터 전달받은 데이터를 분석하여, 2026년 기준 세법에 맞춘 정확한 수학적 계산과 법적 리스크 리포트를 마크다운으로 출력해.
-
-          [입력 데이터]
-          ${JSON.stringify(formData, null, 2)}
-
-          [출력 가이드]
-          1. **할머니, 할아버지도 이해할 수 있는 아주 쉬운 용어**를 사용해줘.
-          2. 마크다운 문법을 적극 활용해. 제목과 본문 사이에는 반드시 한 줄을 띄워줘.
-          3. '시나리오 A(그냥 주는 것)'와 '시나리오 B(빌려주는 것)'의 차이점을 아주 쉽게 대조해줘.
-          ${isLivingMode ? "4. **생활비 지원은 비과세라는 점을 강조하고, 보증금은 증여세 대상이 될 수 있음을 명확히 짚어줘.**" : "4. 만약 세금이 0원이라면, \"나라에서 정한 공제 혜택 덕분에 세금을 안 내도 됩니다\"라고 친절히 설명해줘."}
-          5. **'차용' 시나리오에서 자녀가 부모님께 매달 보내야 하는 구체적인 이자 금액(${formatKRW(loanScenario.monthlyInterest)})을 명시하고, 반드시 자녀 본인의 소득으로 보내야 한다는 점을 강조해줘.**
-          6. 받는 사람의 소득 상태(${formData.income_status})에 따라 세무조사 리스크를 아주 쉽게 경고해줘.
-          7. **VVIP 전략 제안**: 
-             - "신규 자녀 법인 설립 후 부모 법인의 영업권/온라인 권리금 양도"
-             - "가족 법인을 활용한 자산 이전" 또는 "증여 후 이익소각"
-             - 위 전략 중 상황에 맞는 것을 골라 상세히 설명해줘.
-          8. **리포트의 각 섹션은 가로선(---)으로 구분하여 깔끔하게 보여줘.**
-          9. 반응형 HTML 구조로 작성하여 PDF 인쇄 시 깨지지 않도록 하세요. <div>, <h1>, <p>, <ul>, <li> 태그와 Tailwind CSS 클래스를 활용하세요.
-
-          [출력 포맷 예시]
-          <div class="space-y-8">
-            <h2 class="text-3xl font-black text-slate-900 border-b-2 border-slate-900 pb-4">📊 ${isLivingMode ? "🏠 생활비/보증금 지원 맞춤형" : "어르신도 이해하기 쉬운"} 절세 리포트</h2>
-            <hr class="border-slate-100" />
-            <div class="space-y-4">
-              <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">1. 🧮 그냥 물려줄 때 (시나리오 A)</h3>
-              <ul class="list-none space-y-2">
-                <li>물려주는 것: ${formData.asset_type} ${formatKRW(formData.amount_krw)}</li>
-                <li>나라에서 깎아주는 금액(공제): ${formatKRW(formData.amount_krw - taxResult.taxBase)}</li>
-                <li>내야 할 예상 세금: <strong>${formatKRW(taxResult.finalTax)}</strong></li>
-              </ul>
-            </div>
-            <hr class="border-slate-100" />
-            <div class="space-y-4">
-              <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">2. 💡 똑똑하게 빌려줄 때 (시나리오 B)</h3>
-              <p>매달 내야 하는 이자: <strong>매월 ${formatKRW(loanScenario.monthlyInterest)}</strong></p>
-              <p>주의할 점: 받는 사람이 \`${formData.income_status}\` 상태라면, 나중에 나라에서 의심할 수 있습니다.</p>
-            </div>
-          </div>
-        `;
       }
 
       const response = await ai.models.generateContent({
@@ -399,9 +354,23 @@ export default function App() {
       });
 
       setAiReport(response.text || "리포트 생성에 실패했습니다.");
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      setAiReport("AI 분석 중 오류가 발생했습니다. 다시 시도해주세요.");
+      if (error?.status === 429 || error?.message?.includes('429') || error?.message?.includes('RESOURCE_EXHAUSTED')) {
+        setAiReport(`
+<div class="p-6 bg-red-50 border border-red-200 rounded-2xl text-red-900">
+  <h3 class="text-xl font-black mb-2 flex items-center gap-2"><ShieldAlert size="24" /> API 한도 초과 (Quota Exceeded)</h3>
+  <p class="mb-4">Gemini API의 무료 사용량 한도를 초과했습니다. 다음 단계를 확인해 주세요:</p>
+  <ul class="list-disc pl-5 space-y-2 font-medium">
+    <li>잠시 후 다시 시도해 보세요.</li>
+    <li>Google AI Studio에서 결제 정보를 확인하거나 한도를 늘려주세요.</li>
+    <li><a href="https://ai.google.dev/gemini-api/docs/rate-limits" target="_blank" class="underline text-red-700 hover:text-red-900">Rate Limits 문서 확인하기</a></li>
+  </ul>
+</div>
+        `);
+      } else {
+        setAiReport("AI 분석 중 오류가 발생했습니다. 다시 시도해주세요.");
+      }
     } finally {
       setIsGenerating(false);
     }
@@ -509,7 +478,7 @@ export default function App() {
                   <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
                     <UserCircle2 size={14} /> 개인/가족 절세 시뮬레이션
                   </h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-4">
                     <button 
                       onClick={() => {
                         setMode('gift');
@@ -522,20 +491,6 @@ export default function App() {
                       </div>
                       <p className="font-bold text-lg">증여/상속 시뮬레이션</p>
                       <p className="text-sm text-white/60">자산 이전 시 발생하는 세금과 절세 전략</p>
-                    </button>
-                    <button 
-                      onClick={() => {
-                        setMode('living');
-                        setFormData(prev => ({ ...prev, asset_type: '현금', amount_krw: 100_000_000 }));
-                        setStep(1);
-                      }}
-                      className="group bg-white border-2 border-slate-100 p-6 rounded-3xl text-left hover:border-indigo-600 transition-all duration-300"
-                    >
-                      <div className="w-10 h-10 bg-slate-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-indigo-50 group-hover:text-indigo-600">
-                        <Wallet size={20} />
-                      </div>
-                      <p className="font-bold text-lg text-slate-800">생활비/보증금 지원</p>
-                      <p className="text-sm text-slate-400">가장 많이 묻는 실생활 절세 시나리오</p>
                     </button>
                   </div>
                 </div>
@@ -856,7 +811,27 @@ export default function App() {
                   </div>
                 </StepWrapper>
               ) : (
-                <StepWrapper title="이전할 금액은 얼마인가요?" description="정확한 시세나 이체 예정 금액을 입력해주세요.">
+                <StepWrapper title="이전할 금액(가치)은 얼마인가요?" description="정확한 시세나 이체 예정 금액을 입력해주세요.">
+                  {/* Dynamic Tips based on asset type */}
+                  {['꼬마빌딩/상가', '다가구/단독주택'].includes(formData.asset_type) && (
+                    <div className="mb-6 p-5 bg-amber-50 border border-amber-200 rounded-2xl text-sm text-amber-900 leading-relaxed shadow-sm">
+                      <p className="font-black flex items-center gap-1 mb-2 text-amber-700"><Lightbulb size={16} /> 30년차 세무사의 팁</p>
+                      <p>꼬마빌딩이나 상가는 과거 기준시가(공시지가)로 신고하는 경우가 많았으나, 최근 국세청이 <strong>직접 감정평가를 실시하여 시가로 과세</strong>하는 추세입니다. 보수적인 시뮬레이션을 위해 기준시가가 아닌 <strong>예상 시가(또는 감정가액)</strong>를 입력하시는 것을 권장합니다.</p>
+                    </div>
+                  )}
+                  {formData.asset_type === '아파트' && (
+                    <div className="mb-6 p-5 bg-blue-50 border border-blue-200 rounded-2xl text-sm text-blue-900 leading-relaxed shadow-sm">
+                      <p className="font-black flex items-center gap-1 mb-2 text-blue-700"><Lightbulb size={16} /> 평가 팁</p>
+                      <p>아파트는 원칙적으로 <strong>유사 매매사례가액(최근 실거래가)</strong>이 우선 적용됩니다. 국토교통부 실거래가를 참고하여 현재 시세를 입력해주세요.</p>
+                    </div>
+                  )}
+                  {formData.asset_type === '비상장주식' && (
+                    <div className="mb-6 p-5 bg-indigo-50 border border-indigo-200 rounded-2xl text-sm text-indigo-900 leading-relaxed shadow-sm">
+                      <p className="font-black flex items-center gap-1 mb-2 text-indigo-700"><Lightbulb size={16} /> 평가 팁</p>
+                      <p>비상장주식은 <strong>순손익가치와 순자산가치를 가중평균</strong>하여 평가합니다. 세무 대리인을 통해 가결산된 예상 1주당 가치 × 주식 수를 입력해주세요.</p>
+                    </div>
+                  )}
+
                   <div className="bg-white border-2 border-indigo-600 rounded-3xl p-8 shadow-xl shadow-indigo-50">
                     <div className="flex items-baseline justify-center gap-2 mb-4">
                       <input 
@@ -1028,7 +1003,7 @@ export default function App() {
                 </p>
               </div>
 
-              {mode !== 'cit' && (
+              {mode === 'gift' && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative">
                   {/* Result Reveal Overlay */}
                   {taxResult.finalTax > 0 && !isRevealed && (
@@ -1205,7 +1180,7 @@ export default function App() {
                     <div className="space-y-4">
                       <h3 className="text-lg font-black border-b-2 border-slate-900 pb-2">1. 기본 정보</h3>
                       <div className="grid grid-cols-2 gap-2 text-sm">
-                        {['gift', 'living'].includes(mode) ? (
+                        {mode === 'gift' ? (
                           <>
                             <span className="text-slate-500">받는 사람</span><span className="font-bold">{formData.recipient}</span>
                             <span className="text-slate-500">자산 종류</span><span className="font-bold">{formData.asset_type}</span>
@@ -1224,7 +1199,7 @@ export default function App() {
                     <div className="space-y-4">
                       <h3 className="text-lg font-black border-b-2 border-slate-900 pb-2">2. 핵심 요약</h3>
                       <div className="grid grid-cols-2 gap-2 text-sm">
-                        {['gift', 'living'].includes(mode) ? (
+                        {mode === 'gift' ? (
                           <>
                             <span className="text-slate-500">단순 증여 시</span><span className="font-bold text-red-600">{formatKRW(taxResult.finalTax)}</span>
                             <span className="text-slate-500">AI 추천 대안</span><span className="font-bold text-emerald-600">0원</span>
